@@ -1,0 +1,45 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+        </div>
+        <ul class="nav navbar-nav">
+            <a href="/admin/product/listproduct">
+                <button class="active btn btn-lg navbar-btn" style="background-color: #00b1b6">
+                    <span style="color: white;">List Product</span>
+                </button>
+                <!--<li class="active"><a href="/admin/category/listcategory">List Category</a></li>-->
+            </a>
+            <a href="/admin/product/addproduct">
+
+                <button class="btn btn-lg navbar-btn" style="background-color: #ff0072">
+
+                    <span style="color: white;">Add Product</span></button>
+            </a>
+        </ul>
+    </div>
+</nav>
+<div class="templatemo-content-container">
+    <div class="templatemo-content-widget white-bg">
+        <h2 class="margin-bottom-10">Products Image</h2>
+        <p>Please tell me product's information</p>
+        <input type="text" name="product_Name" value="{{productName}}" hidden>
+        <form action="/admin/product/addproduct/addimage/{{productName}}" class="templatemo-login-form" method="post" enctype="multipart/form-data">
+            <div class="row form-group">
+                <div class="col-lg-12">
+
+                    <label class="control-label templatemo-block" for="image">Image</label>
+                    <!-- <input type="file" name="fileToUpload" id="fileToUpload" class="margin-bottom-10"> -->
+                    <input type="file" accept="image/*" name="image" class="filestyle" data-buttonName="btn-primary" data-buttonBefore="true" data-icon="false">
+                    <p>Maximum upload size is 5 MB.</p>
+                </div>
+            </div>
+
+            <div class="form-group text-right">
+               <!-- <label style="color: red">{{message}}</label>-->
+                <button type="submit" class="templatemo-blue-button">Submit</button>
+
+            </div>
+        </form>
+    </div>
+</div>

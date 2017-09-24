@@ -1,0 +1,74 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+        </div>
+        <ul class="nav navbar-nav">
+            <a href="/admin/bill">
+                <button class="active btn btn-lg navbar-btn" style="background-color: #00b1b6">
+                    <span style="color: white;">Manage Bill</span>
+                </button>
+
+            </a>
+            <!--<a href="/admin/category/addcategory">-->
+
+                <!--<button class="btn btn-lg navbar-btn" style="background-color: #ff0072">-->
+
+                    <!--<span style="color: white;">Add Category</span></button>-->
+            <!--</a>-->
+        </ul>
+    </div>
+</nav>
+<div class="templatemo-content-container">
+    <div class="templatemo-flex-row flex-content-row">
+        <div class="col-1">
+            <div class="panel panel-default templatemo-content-widget white-bg no-padding templatemo-overflow-hidden">
+                <i class="fa fa-times"></i>
+                <div class="panel-heading templatemo-position-relative"><h2 class="text-uppercase">Bill Table</h2></div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Tên Người Nhận</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>
+                            <th>Ghi Chú</th>
+                            <th>Ngày xuất hóa đơn</th>
+                            <th>Trạng thái</th>
+                            <th>Tổng tiền</th>
+                            <th>Cập nhật trạng thái</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{# each items}}
+                            <tr>
+                                <td hidden>{{this._id}}</td>
+                                <td>{{this.name_reciever}}</td>
+                                <td>{{this.phone_number}}</td>
+                                <td>{{this.address}}</td>
+                                <td>{{this.note}}</td>
+                                <td>{{this.date_of_bill}}</td>
+                                {{#if_eq this.status_of_bill "1"}}
+                                    <td style="background-color: darkorange;color: #e9e90c"><h3 style="color: white">Đang Giao</h3></td>
+                                {{else if_eq this.status_of_bill "2"}}
+                                    <td style="background-color: navy;color: #e9e90c"><h3 style="color: white">Đã Giao</h3></td>
+                                {{else}}
+                                    <td style="background-color: darkred;color: #e9e90c"><h3 style="color: #e9e90c">Chưa Giao</h3></td>
+                                {{/if_eq}}
+                                <td>{{this.total}}</td>
+                                <td>
+                                    <div class="form-group">
+                                        <a href="/admin/bill/{{this._id}}/update">
+                                        <button type="button" class="templatemo-blue-button">Update</button>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

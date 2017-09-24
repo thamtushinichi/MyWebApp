@@ -1,0 +1,69 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+        </div>
+        <ul class="nav navbar-nav">
+            <!--<a href="/admin/category/listcategory">
+                <button class="active btn btn-lg navbar-btn" style="background-color: #00b1b6">
+                    <span style="color: white;">List Category</span>
+                </button>
+                &lt;!&ndash;<li class="active"><a href="/admin/category/listcategory">List Category</a></li>&ndash;&gt;
+            </a>
+            <a href="/admin/category/addcategory">
+
+                <button class="btn btn-lg navbar-btn" style="background-color: #ff0072">
+
+                    <span style="color: white;">Add Category</span></button>
+            </a>-->
+        </ul>
+    </div>
+</nav>
+<div class="templatemo-content-container">
+    <div class="templatemo-flex-row flex-content-row">
+        <div class="col-1">
+            <div class="panel panel-default templatemo-content-widget white-bg no-padding templatemo-overflow-hidden">
+                <i class="fa fa-times"></i>
+                <div class="panel-heading templatemo-position-relative"><h2 class="text-uppercase">Top 10 Product Table</h2></div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Tên Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Tổng tiền (USD)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{# each items}}
+                            <tr>
+                                <td hidden>{{this._id}}</td>
+                                <td>{{this.product_name}}</td>
+                                <td>{{this.quantity}}</td>
+                                <td>{{this.total_price}}</td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var tables = document.getElementsByTagName('table');
+    var table = tables[tables.length - 1];
+    var rows = table.rows;
+    for(var i = 0, td; i < rows.length; i++){
+       if(i==0)
+       {
+           td = document.createElement('td');
+           td.appendChild(document.createTextNode('No.' ));
+           rows[i].insertBefore(td, rows[i].firstChild);
+           continue;
+       }
+        td = document.createElement('td');
+        td.appendChild(document.createTextNode(i ));
+        rows[i].insertBefore(td, rows[i].firstChild);
+    }
+</script>

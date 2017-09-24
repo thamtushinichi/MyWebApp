@@ -1,0 +1,84 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+        </div>
+        <ul class="nav navbar-nav">
+            <a href="/admin/user/listuser">
+                <button class="active btn btn-lg navbar-btn" style="background-color: #00b1b6">
+                    <span style="color: white;">List Account</span>
+                </button>
+                <!--<li class="active"><a href="/admin/category/listcategory">List Category</a></li>-->
+            </a>
+            <a href="/admin/user/adduser">
+
+                <button class="btn btn-lg navbar-btn" style="background-color: #ff0072">
+
+                    <span style="color: white;">Create a Account</span></button>
+            </a>
+        </ul>
+    </div>
+</nav>
+<div class="templatemo-content-container">
+    <div class="templatemo-content-widget white-bg">
+        <h2 class="margin-bottom-10">Users Update</h2>
+        <p>Please tell me user's information</p>
+        <form action="/admin/user/{{item.id}}/updateuser" class="templatemo-login-form" method="post">
+            <div class="row form-group">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputProductName">User Name</label>
+                    <input type="text" name ="username" value="{{item.username}}" class="form-control" id="inputProductName" placeholder="..." required disabled>
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputProductName">Full Name</label>
+                    <input type="text" name ="fullname" value="{{item.name}}" class="form-control" id="inputProductName" placeholder="..." required>
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" value="{{item.password}}" class="form-control" placeholder="Enter password" id="inputPassword" name="password" required>
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for=""> </label>
+                    <div class="templatemo-block margin-bottom-5">
+                         <input type="checkbox" name="passwordOptions" id="checkpass" value="true">
+                         <label for="checkpass" class="font-weight-400"><span></span>Reset Password</label>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 form-group">
+                    <label for="inputEmail">Email address</label>
+                    <input type="email" class="form-control" value="{{item.email}}" id="inputEmail" placeholder="Enter email" name="email" required>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputProductName">Quyền hiện tại</label>
+                    <input type="text" name ="" value="{{item.role_name}}" class="form-control" id="inputProductName" placeholder="..." disabled>
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label class="control-label templatemo-block">Cấp Quyền</label>
+                    <select name='role_id' class="form-control" >
+                        {{#if_eq item.role_id "1"}}
+                            <option value="1" selected>Admin</option>
+                            <option value="2">User</option>
+                            <option value="0">Locked</option>
+                        {{else if_eq item.role_id "2"}}
+                            <option value="1">Admin</option>
+                            <option value="2" selected>User</option>
+                            <option value="0">Locked</option>
+                        {{else}}
+                            <option value="1">Admin</option>
+                            <option value="2">User</option>
+                            <option value="0" selected>Locked</option>
+                        {{/if_eq}}
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group text-right">
+                <label style="color: red">{{message}}</label>
+                <button type="submit" class="templatemo-blue-button">Submit</button>
+                <button type="reset" class="templatemo-white-button">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>

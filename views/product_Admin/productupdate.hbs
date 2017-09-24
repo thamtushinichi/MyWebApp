@@ -1,0 +1,86 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+        </div>
+        <ul class="nav navbar-nav">
+            <a href="/admin/product/listproduct">
+                <button class="active btn btn-lg navbar-btn" style="background-color: #00b1b6">
+                    <span style="color: white;">List Product</span>
+                </button>
+                <!--<li class="active"><a href="/admin/category/listcategory">List Category</a></li>-->
+            </a>
+            <a href="/admin/product/addproduct">
+
+                <button class="btn btn-lg navbar-btn" style="background-color: #ff0072">
+
+                    <span style="color: white;">Add Product</span></button>
+            </a>
+        </ul>
+    </div>
+</nav>
+<div class="templatemo-content-container">
+    <div class="templatemo-content-widget white-bg">
+        <h2 class="margin-bottom-10">Product Detail</h2>
+        <p>This is detail of product</p>
+        <form action="/admin/product/listproduct/{{product._id}}/update" class="templatemo-login-form" method="post">
+            <div class="row form-group">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputProductName">Product Name</label>
+                    <input type="text" name ="product_name"
+                           value="{{product.product_name}}"
+                           class="form-control" id="inputProductName" placeholder="..." required >
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputPrice">Price (USD)</label>
+                    <input type="text" name ="price" class="form-control"
+                           value="{{product.price}}"
+                           onkeypress='return (event.charCode >=48 && event.charCode<=57)||event.charCode==46'
+                           id="inputPrice" placeholder="..." required >
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-12 form-group">
+                    <label class="control-label" for="inputNote1">Description</label>
+                    <textarea class="form-control" value="" id="inputNote1" name ="description" rows="8" required >{{product.description}}</textarea>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-12 form-group">
+                    <label class="control-label" for="inputNote">Technical Parameter</label>
+                    <textarea class="form-control" value="" id="inputNote" name ="technical_parameter" rows="10" required >{{product.technical_parameter}}</textarea>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label class="control-label templatemo-block">Category of Product</label>
+                    <input type="text"
+                           value="{{category.category_name}}"
+                           class="form-control" id="inputProductName" placeholder="..." disabled >
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label class="control-label templatemo-block">Publisher of Product</label>
+                        <input type="text"
+                               value="{{publisher.publisher_name}}"
+                               class="form-control" id="inputProductName" placeholder="..." disabled >
+                </div>
+            </div>
+
+            <div class="form-group text-right">
+                <label style="color: red">{{message}}</label>
+                <button type="submit" class="templatemo-blue-button">Update</button>
+                <button type="reset" class="templatemo-white-button">Reset</button>
+            </div>
+        </form>
+    </div>
+    <div class="templatemo-content-widget white-bg col-1 templatemo-position-relative templatemo-content-img-bg" style="min-height: 600px">
+        <div class="row form-group">
+            <div class="col-lg-6 form-group">
+                <label class="control-label" for="inputNote">Image</label>
+                <div class="templatemo-content-widget white-bg col-1 templatemo-position-relative templatemo-content-img-bg">
+                    <img src="{{product.product_image}}" class="img-responsive content-bg-img" style="min-height: 380px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

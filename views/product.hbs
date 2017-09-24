@@ -1,0 +1,353 @@
+<!--&lt;!&ndash; banner &ndash;&gt;-->
+<!--<div class="banner banner1">-->
+    <!--<div class="container">-->
+        <!--<h2>Great Offers on <span>Mobiles</span> Flat <i>35% Discount</i></h2>-->
+    <!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash; breadcrumbs &ndash;&gt;-->
+	<!--<div class="breadcrumb_dress">-->
+		<!--<div class="container">-->
+			<!--<ul>-->
+				<!--<li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a> <i>/</i></li>-->
+				<!--<li>Detail</li>-->
+			<!--</ul>-->
+		<!--</div>-->
+	<!--</div>-->
+	<!--&lt;!&ndash; //breadcrumbs &ndash;&gt;  -->
+	<!-- single -->
+    {{#product}}
+	<div class="single">
+		<div class="container">
+			<div class="col-md-4 single-left">
+				<div class="flexslider">
+					<ul class="slides">
+						<li data-thumb="{{product_image}}">
+							<div class="thumb-image"> <img src="{{product_image}}" data-imagezoom="true" class="img-responsive" alt=""> </div>
+						</li>
+                        <li data-thumb="{{product_image}}">
+                            <div class="thumb-image"> <img src="{{product_image}}" data-imagezoom="true" class="img-responsive" alt=""> </div>
+                        </li>
+                        <li data-thumb="{{product_image}}">
+                            <div class="thumb-image"> <img src="{{product_image}}" data-imagezoom="true" class="img-responsive" alt=""> </div>
+                        </li>
+                    </ul>
+				</div>
+				<!-- flexslider -->
+					<script defer src="/js/jquery.flexslider.js"></script>
+					<link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen" />
+					<script>
+					// Can also be used with $(document).ready()
+					$(window).load(function() {
+					  $('.flexslider').flexslider({
+						animation: "slide",
+						controlNav: "thumbnails"
+					  });
+					});
+					</script>
+				<!-- flexslider -->
+				<!-- zooming-effect -->
+					<script src="/js/imagezoom.js"></script>
+				<!-- //zooming-effect -->
+			</div>
+			<div class="col-md-8 single-right">
+				<h3>{{product_name}}</h3>
+				<div class="rating1">
+					<span class="starRating">
+						<input id="rating5" type="radio" name="rating" value="5">
+						<label for="rating5">5</label>
+						<input id="rating4" type="radio" name="rating" value="4">
+						<label for="rating4">4</label>
+						<input id="rating3" type="radio" name="rating" value="3" checked>
+						<label for="rating3">3</label>
+						<input id="rating2" type="radio" name="rating" value="2">
+						<label for="rating2">2</label>
+						<input id="rating1" type="radio" name="rating" value="1">
+						<label for="rating1">1</label>
+					</span>
+				</div>
+				<div class="description">
+					<h5><i>Mô tả</i></h5>
+					<p>{{description}}</p>
+                    <div class="row">
+                        <ol></ol>
+                    </div>
+                    <h5><i>Thông số kĩ thuật</i></h5>
+                    <p>{{technical_parameter}}</p>
+				</div>
+				<div class="color-quality">
+					<div class="color-quality-left">
+						<h5>Color : </h5>
+						<ul>
+							<li><a href="#"><span></span></a></li>
+							<li><a href="#" class="brown"><span></span></a></li>
+							<li><a href="#" class="purple"><span></span></a></li>
+							<li><a href="#" class="gray"><span></span></a></li>
+						</ul>
+					</div>
+					<div class="color-quality-right">
+						<h5>Quality :</h5>
+						 <div class="quantity">
+							<div class="quantity-select">
+								<div class="entry value-minus1">&nbsp;</div>
+								<div class="entry value1"><span>1</span></div>
+								<div class="entry value-plus1 active">&nbsp;</div>
+							</div>
+						</div>
+						<!--quantity-->
+								<script>
+								$('.value-plus1').on('click', function(){
+									var divUpd = $(this).parent().find('.value1'), newVal = parseInt(divUpd.text(), 10)+1;
+									divUpd.text(newVal);
+								});
+
+								$('.value-minus1').on('click', function(){
+									var divUpd = $(this).parent().find('.value1'), newVal = parseInt(divUpd.text(), 10)-1;
+									if(newVal>=1) divUpd.text(newVal);
+								});
+								</script>
+							<!--quantity-->
+
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+
+				<div class="simpleCart_shelfItem">
+					<p><i class="item_price">{{price}}$</i></p>
+					<form action="#" method="post">
+                        <input type="hidden" name="id" value="{{_id}}" />
+						<input type="hidden" name="cmd" value="_cart">
+						<input type="hidden" name="add" value="1">
+						<input type="hidden" name="w3ls_item" value="{{product_name}}">
+						<input type="hidden" name="amount" value="{{price}}">
+						<button type="submit" class="w3ls-cart">Mua</button>
+					</form>
+				</div> 
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+    {{/product}}
+
+	<div class="additional_info">
+		<div class="container">
+			<div class="sap_tabs">	
+				<div id="horizontalTab1" style="display: block; width: 100%; margin: 0px;">
+					<ul>
+						<li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Thông tin sản phẩm</span></li>
+						<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Bình luận</span></li>
+                    </ul>
+                    {{#product}}
+                    <div class="tab-1 resp-tab-content additional_info_grid" aria-labelledby="tab_item-0">
+						<h3>{{product_name}}</h3>
+						<p>{{description}}</p>
+					</div>
+                    {{/product}}
+
+					<div  class="tab-2 resp-tab-content additional_info_grid" aria-labelledby="tab_item-1">
+						<h4>Bình luận</h4>
+                        <div id="comment">
+                        {{#each comments}}
+						<div class="additional_info_sub_grids">
+							<div class="col-xs-2 additional_info_sub_grid_left">
+
+							</div>
+							<div class="col-xs-10 additional_info_sub_grid_right">
+								<div class="additional_info_sub_grid_rightl">
+									<a href="single.html">{{name}}</a>
+									<h5>{{date}}</h5>
+									<p>{{detail}}</p>
+								</div>
+								<div class="additional_info_sub_grid_rightr">
+									<div class="rating">
+										<div class="rating-left">
+											<img src="/images/star-.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="/images/star-.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="/images/star-.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="/images/star.png" alt=" " class="img-responsive">
+										</div>
+										<div class="rating-left">
+											<img src="/images/star.png" alt=" " class="img-responsive">
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+                        {{/each}}
+                        </div>
+                        {{#product}}
+                            <button type="button" class="btn btn-link" id="more" name="10" onclick="show_comment('{{_id}}')">Xem thêm</button>
+                        {{/product}}
+
+
+						<div class="review_grids">
+							<h5>Bình luận của bạn</h5>
+							<form action="#" method="post">
+								<input type="text" id="name" name="Name" placeholder="Tên bạn" value="{{name}}" {{type}} required="required">
+								<textarea id="detail" name="Review" placeholder="Bình luận của bạn" required="" style="margin-top: 10px"></textarea>
+                        {{#product}}
+                                <input type="hidden" id="product_id" value="{{_id}}">
+								<input type="button" value="Submit" onclick="saveComment();">
+                        {{/product}}
+							</form>
+						</div>
+
+					</div>
+				</div>	
+			</div>
+			<script src="/js/easyResponsiveTabs.js" type="text/javascript"></script>
+			<script type="text/javascript">
+				$(document).ready(function () {
+					$('#horizontalTab1').easyResponsiveTabs({
+						type: 'default', //Types: default, vertical, accordion           
+						width: 'auto', //auto or any width like 600px
+						fit: true   // 100% fit in a container
+					});
+				});
+			</script>
+		</div>
+	</div>
+
+	<!-- Related Products -->
+	<div class="w3l_related_products">
+		<div class="container">
+			<h3>Sản phẩm khác</h3>
+			<ul id="flexiselDemo2">
+                {{#each items}}
+				<li>
+					<div class="w3l_related_products_grid">
+						<div class="agile_ecommerce_tab_left mobiles_grid">
+							<div class="hs-wrapper hs-wrapper3">
+								<img src="{{product_image}}" alt=" " class="img-responsive" />
+                                <img src="{{product_image}}" alt=" " class="img-responsive" />
+                                <img src="{{product_image}}" alt=" " class="img-responsive" />
+                                <img src="{{product_image}}" alt=" " class="img-responsive" />
+                                <img src="{{product_image}}" alt=" " class="img-responsive" />
+								<div class="w3_hs_bottom">
+									<div class="flex_ecommerce">
+										<a href="#" data-toggle="modal" data-target="#{{_id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+									</div>
+								</div>
+							</div>
+							<h5><a href="/detail/{{_id}}">{{product_name}}</a></h5>
+							<div class="simpleCart_shelfItem">
+								<p class="flexisel_ecommerce_cart"><i class="item_price">${{price}}</i></p>
+								<form action="#" method="post">
+                                    <input type="hidden" name="id" value="{{_id}}" />
+									<input type="hidden" name="cmd" value="_cart">
+									<input type="hidden" name="add" value="1">
+									<input type="hidden" name="w3ls_item" value="{{product_name}}">
+									<input type="hidden" name="amount" value="{{price}}">
+									<button type="submit" class="w3ls-cart">Mua</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</li>
+                {{/each}}
+			</ul>
+			
+				<!--<script type="text/javascript">-->
+					<!--$(window).load(function() {-->
+						<!--$("#flexiselDemo2").flexisel({-->
+							<!--visibleItems:4,-->
+							<!--animationSpeed: 1000,-->
+							<!--autoPlay: true,-->
+							<!--autoPlaySpeed: 3000,-->
+							<!--pauseOnHover: true,-->
+							<!--enableResponsiveBreakpoints: true,-->
+							<!--responsiveBreakpoints: {-->
+								<!--portrait: {-->
+									<!--changePoint:480,-->
+									<!--visibleItems: 1-->
+								<!--},-->
+								<!--landscape: {-->
+									<!--changePoint:640,-->
+									<!--visibleItems:2-->
+								<!--},-->
+								<!--tablet: {-->
+									<!--changePoint:768,-->
+									<!--visibleItems: 3-->
+								<!--}-->
+							<!--}-->
+						<!--});-->
+
+					<!--});-->
+				<!--</script>-->
+				<!--<script type="text/javascript" src="/js/jquery.flexisel.js"></script>-->
+		</div>
+	</div>
+	<!-- //Related Products -->
+{{#each items}}
+	<div class="modal video-modal fade" id="{{_id}}" tabindex="-1" role="dialog" aria-labelledby="myModal6">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
+				</div>
+				<section>
+					<div class="modal-body">
+						<div class="col-md-5 modal_body_left">
+							<img src="{{product_image}}" alt=" " class="img-responsive" />
+						</div>
+						<div class="col-md-7 modal_body_right">
+							<h4>{{product_name}}</h4>
+                            <h5><i>Mô tả</i></h5>
+							<p>{{description}}</p>
+                            <h5><i>Thông số kĩ thuật</i></h5>
+                            <p>{{technical_parameter}}</p>
+							<div class="rating">
+								<div class="rating-left">
+									<img src="/images/star-.png" alt=" " class="img-responsive" />
+								</div>
+								<div class="rating-left">
+									<img src="/images/star-.png" alt=" " class="img-responsive" />
+								</div>
+								<div class="rating-left">
+									<img src="/images/star-.png" alt=" " class="img-responsive" />
+								</div>
+								<div class="rating-left">
+									<img src="/images/star.png" alt=" " class="img-responsive" />
+								</div>
+								<div class="rating-left">
+									<img src="/images/star.png" alt=" " class="img-responsive" />
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+							<div class="modal_body_right_cart simpleCart_shelfItem">
+								<p><span>$150</span> <i class="item_price">$100</i></p>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="id" value="{{_id}}" />
+                                    <input type="hidden" name="cmd" value="_cart" />
+                                    <input type="hidden" name="add" value="1" />
+                                    <input type="hidden" name="w3ls_item" value="{{this.product_name}}" />
+                                    <input type="hidden" name="amount" value="{{this.price}}" />
+                                    <button type="submit" class="w3ls-cart">Mua</button>
+                                </form>
+							</div>
+							<h5>Color</h5>
+							<div class="color-quality">
+								<ul>
+									<li><a href="#"><span></span></a></li>
+									<li><a href="#" class="brown"><span></span></a></li>
+									<li><a href="#" class="purple"><span></span></a></li>
+									<li><a href="#" class="gray"><span></span></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+    {{/each}}
+	<!-- //single -->

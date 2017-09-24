@@ -1,0 +1,47 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+        </div>
+        <ul class="nav navbar-nav">
+            <a href="/admin/category/listcategory">
+                <button class="active btn btn-lg navbar-btn" style="background-color: #00b1b6">
+                    <span style="color: white;">List Category</span>
+                </button>
+                <!--<li class="active"><a href="/admin/category/listcategory">List Category</a></li>-->
+            </a>
+            <a href="/admin/category/addcategory">
+
+                <button class="btn btn-lg navbar-btn" style="background-color: #ff0072">
+
+                    <span style="color: white;">Add Category</span></button>
+            </a>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="templatemo-content-container">
+    <div class="templatemo-flex-row flex-content-row">
+        <div class="col-1">
+            <div class="panel panel-default margin-10">
+                <div class="panel-heading"><h2 class="text-uppercase">Category Form</h2></div>
+                <div class="panel-body">
+                    <form action="/admin/category/listcategory/{{item._id}}/update" class="templatemo-login-form" method="post">
+                        <div class="form-group">
+                            <label for="inputCategory">Category Name</label>
+                            <input type="text" class="form-control"
+                                   value="{{item.category_name}}"
+                                   name='category_name' required="required" id="inputCategory" placeholder="Enter Category Name">
+                        </div>
+                        <div class="form-group">
+                            <label style="color: red">{{message}}</label>
+                            <button type="submit" class="templatemo-blue-button">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

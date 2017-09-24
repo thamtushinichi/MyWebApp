@@ -1,0 +1,130 @@
+/*
+
+Medigo Template (Green)
+
+http://www.templatemo.com/preview/templatemo_460_medigo
+
+*/
+
+/*------------------------------------------------------
+	BASIC STYLES 
+--------------------------------------------------------*/
+
+
+
+
+.main-nav ul, .main_menu, .main_menu li ul, #filters, .pages, .project-single .meta-post, .archive-wrapper .archive-list, .categories ul, .thumbs, .footer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+.main-nav ul li a {
+  color: #31373a;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif;
+  padding: 5px 15px;
+  display: block;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+.main-nav ul li a:hover {
+  color: #63bc63;
+}
+.main-nav ul li a i {
+  margin-left: 7px;
+}
+.main-nav ul li.active a {
+  color: #63bc63;
+  background-color: #f1f4f5;
+}
+.main-nav ul li ul {
+  display: none;
+  top: 100%;
+  left: 0;
+  margin-top: 5px;
+  position: absolute;
+  width: 220px;
+  background-color: white;
+  border: 2px solid #f1f4f5;
+}
+.main-nav ul li ul li {
+  margin-left: 0;
+  width: 100%;
+  border-bottom: 1px solid #dce4e6;
+}
+.main-nav ul li ul li:last-child {
+  border-bottom: none;
+}
+.main-nav ul li ul li a {
+  background-color: transparent !important;
+  color: #777777 !important;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+.main-nav ul li ul li a:hover {
+  color: #63bc63 !important;
+}
+.main-nav ul li ul li:last-child a {
+  border-bottom: none;
+}
+
+a.menu-toggle-btn {
+  float: right;
+  margin-right: 20px;
+  color: #31373a;
+  font-size: 14px;
+  display: block;
+}
+a.menu-toggle-btn i {
+  font-size: 18px;
+}
+
+.main_menu li {
+  border-bottom: 1px solid #485156;
+  padding: 10px 0;
+}
+.main_menu li:first-child {
+  padding-top: 0;
+}
+.main_menu li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.main_menu li a {
+  font-size: 14px;
+  font-family: "Raleway", sans-serif;
+  color: #bfbfbf;
+  font-weight: 500;
+}
+.main_menu li ul li {
+  margin-left: 20px;
+}
+.main_menu li ul li:first-child {
+  border-top: 1px solid #485156;
+  padding-top: 8px;
+  margin-top: 10px;
+}
+.main_menu li ul li:before {
+  content: '-';
+  color: gray;
+  margin-right: 10px;
+}
+
+.responsive_menu {
+  padding: 20px;
+  background-color: rgba(49, 55, 58, 0.98);
+  display: none;
+  position: relative;
+  z-index: 9999;
+}
+
+/*------------------------------------------------------
+	General Styling 
+--------------------------------------------------------*/

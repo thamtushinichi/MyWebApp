@@ -1,0 +1,81 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+        </div>
+        <ul class="nav navbar-nav">
+            <a href="/admin/bill">
+                <button class="active btn btn-lg navbar-btn" style="background-color: #00b1b6">
+                    <span style="color: white;">Manage Bill</span>
+                </button>
+
+            </a>
+            <!--<a href="/admin/category/addcategory">-->
+
+            <!--<button class="btn btn-lg navbar-btn" style="background-color: #ff0072">-->
+
+            <!--<span style="color: white;">Add Category</span></button>-->
+            <!--</a>-->
+        </ul>
+    </div>
+</nav>
+<div class="templatemo-content-container">
+    <div class="templatemo-flex-row flex-content-row">
+        <div class="col-1">
+            <div class="panel panel-default templatemo-content-widget white-bg no-padding templatemo-overflow-hidden">
+                <i class="fa fa-times"></i>
+                <div class="panel-heading templatemo-position-relative"><h2 class="text-uppercase">Cập nhật tình trạng hóa đơn</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="templatemo-content-widget white-bg">
+        <h2 class="margin-bottom-10">Cập nhật tình trạng hóa đơn</h2>
+        <p>Please tell me the truth</p>
+        <form action="/admin/bill/{{item._id}}/update" class="templatemo-login-form" method="post">
+            <div class="row form-group">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputProductName">Trạng thái hiện tại</label>
+                    {{#if_eq item.status_of_bill "1"}}
+                        <input type="text" name ="" value="Đang Giao"
+                               class="form-control" id="inputProductName" placeholder="..." disabled>
+                    {{else if_eq item.status_of_bill "2"}}
+                        <input type="text" name ="" value="Đã Giao"
+                               class="form-control" id="inputProductName" placeholder="..." disabled>
+                    {{else}}
+                        <input type="text" name ="" value="Chưa Giao"
+                               class="form-control" id="inputProductName" placeholder="..." disabled>
+                    {{/if_eq}}
+
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label class="control-label templatemo-block">Cập nhật trạng thái hóa đơn</label>
+                    <select name='status_of_bill' class="form-control" >
+                        {{#if_eq item.status_of_bill "1"}}
+                            <option value="0">Chưa Giao</option>
+                            <option value="1" selected>Đang Giao</option>
+                            <option value="2">Đã Giao</option>
+
+                        {{else if_eq item.status_of_bill "2"}}
+                            <option value="0">Chưa Giao</option>
+                            <option value="1">Đang Giao</option>
+                            <option value="2" selected>Đã Giao</option>
+
+                        {{else}}
+                            <option value="0" selected>Chưa Giao</option>
+                            <option value="1">Đang Giao</option>
+                            <option value="2">Đã Giao</option>
+
+                        {{/if_eq}}
+                    </select>
+                </div>
+
+            </div>
+            <div class="form-group text-right">
+                <label style="color: red">{{message}}</label>
+                <button type="submit" class="templatemo-blue-button">Update</button>
+                <button type="reset" class="templatemo-white-button">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>

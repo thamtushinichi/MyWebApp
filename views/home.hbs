@@ -1,0 +1,345 @@
+<!-- banner-bottom -->
+<div class="banner-bottom">
+    <div class="container">
+
+        <div class="col-md-5 wthree_banner_bottom_left">
+            <div class="video-img">
+                <a class="play-icon popup-with-zoom-anim" href="#small-dialog">
+                    <span class="glyphicon glyphicon-expand" aria-hidden="true"></span>
+                </a>
+            </div>
+            <!-- pop-up-box -->
+            <script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
+            <!--//pop-up-box -->
+            <div id="small-dialog" class="mfp-hide">
+                <iframe src="https://www.youtube.com/embed/Biay2JNXp4E"></iframe>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    $('.popup-with-zoom-anim').magnificPopup({
+                        type: 'inline',
+                        fixedContentPos: false,
+                        fixedBgPos: true,
+                        overflowY: 'auto',
+                        closeBtnInside: true,
+                        preloader: false,
+                        midClick: true,
+                        removalDelay: 300,
+                        mainClass: 'my-mfp-zoom-in'
+                    });
+
+                });
+            </script>
+        </div>
+
+        <div class="col-md-7 wthree_banner_bottom_right">
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav nav-tabs" role="tablist">
+                    {{#each categories}}
+                        <li id="category" role="presentation1"><a href="#{{_id}}" id="home-tab" role="tab" data-toggle="tab" aria-controls="home">{{category_name}}</a></li>
+                    {{/each}}
+                </ul>
+                <script>
+                    $('#category').addClass('active');
+                </script>
+
+
+                <div id="myTabContent" class="tab-content">
+                {{#each categories}}
+                    <div role="tabpanel" class="tab-pane fade" id="{{_id}}" aria-labelledby="home-tab">
+                        <div class="agile_ecommerce_tabs">
+                            {{#each this.products}}
+                            <div class="col-md-4 agile_ecommerce_tab_left">
+                                <div class="hs-wrapper">
+                                    <img src="{{product_image}}" alt=" " class="img-responsive" />
+                                    <img src="{{product_image}}" alt=" " class="img-responsive" />
+                                    <img src="{{product_image}}" alt=" " class="img-responsive" />
+                                    <img src="{{product_image}}" alt=" " class="img-responsive" />
+                                    <img src="{{product_image}}" alt=" " class="img-responsive" />
+                                    <img src="{{product_image}}" alt=" " class="img-responsive" />
+                                    <div class="w3_hs_bottom">
+                                        <ul>
+                                            <li>
+                                                <a href="#" data-toggle="modal" data-target="#{{this._id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <h5><a href="/detail/{{this._id}}">{{this.product_name}}</a></h5>
+                                <div class="simpleCart_shelfItem">
+                                    <p><i class="item_price">${{this.price}}</i></p>
+                                    <form action="#" method="post">
+                                        <input type="hidden" name="id" value="{{_id}}" />
+                                        <input type="hidden" name="cmd" value="_cart" />
+                                        <input type="hidden" name="add" value="1" />
+                                        <input type="hidden" name="w3ls_item" value="{{this.product_name}}" />
+                                        <input type="hidden" name="amount" value="{{this.price}}" />
+                                        <button type="submit" class="w3ls-cart">Mua</button>
+                                    </form>
+                                </div>
+                            </div>
+                            {{/each}}
+
+                            <div class="clearfix">
+                            </div>
+                            <div class="row">
+                                <!-- Title -->
+                                <ol></ol>
+                            </div>
+                            <a href="/categories/{{this._id}}/1">Xem thêm</a>
+                        </div>
+                    </div>
+                    <script>
+                        var a={{@index}};
+
+                        if(a==0){
+                            $('#{{_id}}').addClass('active');
+                            $('#{{_id}}').addClass('in');
+                        }
+                    </script>
+                {{/each}}
+                </div>
+
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!-- //banner-bottom -->
+<!-- modal-video -->
+{{#each categories}}
+    {{#each this.products}}
+    <div class="modal video-modal fade" id="{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="myModal9">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <section>
+                    <div class="modal-body">
+                        <div class="col-md-5 modal_body_left">
+                            <img src="{{product_image}}" alt=" " class="img-responsive" />
+                        </div>
+                        <div class="col-md-7 modal_body_right">
+                            <h4>{{product_name}}</h4>
+                            <h5><i>Mô tả</i></h5>
+                            <p>{{description}}</p>
+                            <h5><i>Thông số kĩ thuật</i></h5>
+                            <p>{{technical_parameter}}</p>
+                            <div class="rating">
+                                <div class="rating-left">
+                                    <img src="/images/star-.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="/images/star-.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="/images/star-.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="/images/star.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="/images/star.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="modal_body_right_cart simpleCart_shelfItem">
+                                <p><i class="item_price">${{price}}</i></p>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="id" value="{{_id}}" />
+                                    <input type="hidden" name="cmd" value="_cart" />
+                                    <input type="hidden" name="add" value="1" />
+                                    <input type="hidden" name="w3ls_item" value="{{product_name}}" />
+                                    <input type="hidden" name="amount" value="{{price}}"/>
+                                    <button type="submit" class="w3ls-cart">Mua</button>
+                                </form>
+                            </div>
+
+                        <h5>Color</h5>
+                        <div class="color-quality">
+                            <ul>
+                                <li><a href="#"><span></span></a></li>
+                                <li><a href="#" class="brown"><span></span></a></li>
+                                <li><a href="#" class="purple"><span></span></a></li>
+                                <li><a href="#" class="gray"><span></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                    </div>
+                </section>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    {{/each}}
+{{/each}}
+<!-- //modal-video -->
+<!-- banner-bottom1 -->
+<!-- //special-deals -->
+<!-- new-products -->
+<div class="new-products">
+    <div class="container">
+        <h3>Sản phẩm mới</h3>
+        <div class="agileinfo_new_products_grids">
+            {{#each products}}
+            <div class="col-md-3 agileinfo_new_products_grid">
+                <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+                    <div class="hs-wrapper hs-wrapper1">
+                        <img src="{{product_image}}" alt=" " class="img-responsive" />
+                        <img src="{{product_image}}" alt=" " class="img-responsive" />
+                        <img src="{{product_image}}" alt=" " class="img-responsive" />
+                        <img src="{{product_image}}" alt=" " class="img-responsive" />
+                        <img src="{{product_image}}" alt=" " class="img-responsive" />
+                        <div class="w3_hs_bottom w3_hs_bottom_sub">
+                            <ul>
+                                <li>
+                                    <a href="#" data-toggle="modal" data-target="#{{_id}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h5><a href="/detail/{{_id}}">{{product_name}}</a></h5>
+                    <div class="simpleCart_shelfItem">
+                        <p><i class="item_price">{{price}}$</i></p>
+                        <form action="#" method="post">
+                            <input type="hidden" name="id" value="{{_id}}">
+                            <input type="hidden" name="cmd" value="_cart">
+                            <input type="hidden" name="add" value="1">
+                            <input type="hidden" name="w3ls_item" value="{{product_name}}">
+                            <input type="hidden" name="amount" value="{{price}}">
+                            <button type="submit" class="w3ls-cart">Mua</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+
+{{#each products}}
+    <div class="modal video-modal fade" id="{{this.id}}" tabindex="-1" role="dialog" aria-labelledby="myModal9">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <section>
+                    <div class="modal-body">
+                        <div class="col-md-5 modal_body_left">
+                            <img src="{{product_image}}" alt=" " class="img-responsive" />
+
+                        </div>
+                        <div class="col-md-7 modal_body_right">
+                            <h4>{{product_name}}</h4>
+                            <h5><i>Mô tả</i></h5>
+                            <p>{{description}}</p>
+                            <h5><i>Thông số kĩ thuật</i></h5>
+                            <p>{{technical_parameter}}</p>
+                            <div class="rating">
+                                <div class="rating-left">
+                                    <img src="/images/star-.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="/images/star-.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="/images/star-.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="/images/star.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="rating-left">
+                                    <img src="/images/star.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="modal_body_right_cart simpleCart_shelfItem">
+                                <p><i class="item_price">${{price}}</i></p>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="id" value="{{_id}}" />
+                                    <input type="hidden" name="cmd" value="_cart" />
+                                    <input type="hidden" name="add" value="1" />
+                                    <input type="hidden" name="w3ls_item" value="{{product_name}}" />
+                                    <input type="hidden" name="amount" value="{{price}}"/>
+                                    <button type="submit" class="w3ls-cart">Mua</button>
+                                </form>
+                            </div>
+
+                        <h5>Color</h5>
+                        <div class="color-quality">
+                            <ul>
+                                <li><a href="#"><span></span></a></li>
+                                <li><a href="#" class="brown"><span></span></a></li>
+                                <li><a href="#" class="purple"><span></span></a></li>
+                                <li><a href="#" class="gray"><span></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </section>
+                    <div class="clearfix"> </div>
+            </div>
+
+        </div>
+    </div>
+{{/each}}
+<!-- //new-products -->
+<!-- top-brands -->
+<div class="top-brands">
+    <div class="container">
+        <h3>Hãng sản xuất</h3>
+        <div class="sliderfig">
+            <ul id="flexiselDemo1">
+                <li>
+                    <img src="images/tb1.jpg" alt=" " class="img-responsive" />
+                </li>
+                <li>
+                    <img src="images/tb2.jpg" alt=" " class="img-responsive" />
+                </li>
+                <li>
+                    <img src="images/tb3.jpg" alt=" " class="img-responsive" />
+                </li>
+                <li>
+                    <img src="images/tb4.jpg" alt=" " class="img-responsive" />
+                </li>
+                <li>
+                    <img src="images/tb5.jpg" alt=" " class="img-responsive" />
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            $(window).load(function() {
+                $("#flexiselDemo1").flexisel({
+                    visibleItems: 4,
+                    animationSpeed: 1000,
+                    autoPlay: true,
+                    autoPlaySpeed: 3000,
+                    pauseOnHover: true,
+                    enableResponsiveBreakpoints: true,
+                    responsiveBreakpoints: {
+                        portrait: {
+                            changePoint:480,
+                            visibleItems: 1
+                        },
+                        landscape: {
+                            changePoint:640,
+                            visibleItems:2
+                        },
+                        tablet: {
+                            changePoint:768,
+                            visibleItems: 3
+                        }
+                    }
+                });
+
+            });
+        </script>
+        <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+    </div>
+</div>
+<!-- //top-brands -->
