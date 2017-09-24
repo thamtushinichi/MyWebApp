@@ -9,7 +9,8 @@ var async=require('async');
 var multer	=require('multer');
 var storage	=	multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, '../public/images/product');
+        //callback(null, '../public/images/product');
+        callback(null, 'C:\\Users\\NguyenThanhTuan\\Desktop\\public\\images\\product');
     },
     filename: function (req, file, callback) {
         callback(null, Date.now()+'_'+file.originalname);
