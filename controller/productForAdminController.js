@@ -9,8 +9,7 @@ var async=require('async');
 var multer	=require('multer');
 var storage	=	multer.diskStorage({
     destination: function (req, file, callback) {
-        //callback(null, '../public/images/product');
-        callback(null, 'C:\\Users\\NguyenThanhTuan\\Desktop\\public\\images\\product');
+        callback(null, '../public/images/product');
     },
     filename: function (req, file, callback) {
         callback(null, Date.now()+'_'+file.originalname);
@@ -128,7 +127,7 @@ exports.addproductimage = function (req,res,next) {
                     res.render('product_Admin/productpage',{layout:'layoutadmin'});
                     return;
                 }
-                updateProduct.product_image="../images/product/"+req.file.filename;
+                updateProduct.product_image="/images/product/"+req.file.filename;
                 updateProduct.save();
                 res.render('product_Admin/productpage',{layout:'layoutadmin'});
             });
