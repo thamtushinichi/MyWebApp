@@ -4,7 +4,7 @@
 
         </div>
         <ul class="nav navbar-nav">
-            <a href="/admin/product/listproduct">
+            <a href="/admin/product/listproduct" id="lstProduct">
                 <button class="active btn btn-lg navbar-btn" style="background-color: #00b1b6">
                     <span style="color: white;">List Product</span>
                 </button>
@@ -24,22 +24,46 @@
         <h2 class="margin-bottom-10">Products Image</h2>
         <p>Please tell me product's information</p>
         <input type="text" name="product_Name" value="{{productName}}" hidden>
-        <form action="/admin/product/addproduct/addimage/{{productName}}" class="templatemo-login-form" method="post" enctype="multipart/form-data">
-            <div class="row form-group">
-                <div class="col-lg-12">
+        <script type="text/javascript" src="https://static.filestackapi.com/v3/filestack.js"></script>
+        <script>
+            var client = filestack.init('A8t6czWCDQtyM1YWnwumSz');
+            function showPicker() {
+                client.pick({
+                    //Only accepting files with a mimetype 'image/*'
+                    accept: 'image/png',
+                    //Only accepting at most 1 file
+                    maxFiles:1,
+                    storeTo: {
+                        location: 's3'
+                    },
+                    onFileSelected: function(file) {
+                        file.name = Date.now()+'_'+'picture';
+                        return file;
+                    }
+                }).then(function(result) {
+                   // console.log(result);
+                    console.log(result.filesUploaded);
+                  //  console.log(result.filesUploaded[0].url);
+                    $.ajax({
+                        url: '/admin/product/addproduct/addimage/{{productName}}',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({dataFile: result.filesUploaded}),
 
-                    <label class="control-label templatemo-block" for="image">Image</label>
-                    <!-- <input type="file" name="fileToUpload" id="fileToUpload" class="margin-bottom-10"> -->
-                    <input type="file" accept="image/*" name="image" class="filestyle" data-buttonName="btn-primary" data-buttonBefore="true" data-icon="false">
-                    <p>Maximum upload size is 5 MB.</p>
-                </div>
-            </div>
+                    }).done(function (res,textStatus) {
+                        console.log(res);
+                        // dang text la 'success' hoac 'error'
+                        alert("Bạn đã thêm ảnh thành công");
+                    location.reload();
+                    }).fail(function (res,textStatus) {
+                        console.log(res);
+                        console.log(textStatus);
 
-            <div class="form-group text-right">
-               <!-- <label style="color: red">{{message}}</label>-->
-                <button type="submit" class="templatemo-blue-button">Submit</button>
+                    });
+                });
+            }
+        </script>
+        <input type="button" value="Chọn tệp" onclick="showPicker()" />
 
-            </div>
-        </form>
     </div>
 </div>

@@ -105,6 +105,8 @@ exports.addproductpost= function (req, res,next){
 };
 exports.addproductimage = function (req,res,next) {
     var productName= req.params.productName;
+    var data=req.body.dataFile[0].url;
+    console.log(data);
     var xuly= new promise(function (resolve,reject) {
         upload(req,res,function (err) {
             if(err)
@@ -122,14 +124,17 @@ exports.addproductimage = function (req,res,next) {
                     return;
                 }
                 var updateProduct=product;
-                if(!req.file)
-                {
-                    res.render('product_Admin/productpage',{layout:'layoutadmin'});
-                    return;
-                }
-                updateProduct.product_image="/images/product/"+req.file.filename;
+                // if(!req.file)
+                // {
+                //     res.render('product_Admin/productpage',{layout:'layoutadmin'});
+                //     return;
+                // }
+               // updateProduct.product_image="/images/product/"+req.file.filename;
+                updateProduct.product_image=data;
                 updateProduct.save();
-                res.render('product_Admin/productpage',{layout:'layoutadmin'});
+                res.json({success : "Add Successfully", status : 200});
+                return;
+                //res.render('product_Admin/productpage',{layout:'layoutadmin'});
             });
 
         });

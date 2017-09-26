@@ -9,9 +9,7 @@ var productSchema=new schema(
         publisher_id: {type:String},
         technical_parameter:{type:String},
         category_id:{type:String},
-        description:{type:String},
-        image: {type: Buffer},
-        contentType: {type: String}
+        description:{type:String}
     }
 );
 
