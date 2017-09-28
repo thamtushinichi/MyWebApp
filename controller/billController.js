@@ -74,7 +74,7 @@ exports.confirm_checkout=function (req, res, next) {
                 var detail = new BillDetail({
                     bill_id: bill._id,
                     product_id: id[i],
-                    quantity: req.body.quantity[i],
+                    quantity:  productssave[i].quantiti,
                     total_price: productssave[i].product_price
                 });
 
@@ -84,7 +84,8 @@ exports.confirm_checkout=function (req, res, next) {
             var detail = new BillDetail({
                 bill_id: bill._id,
                 product_id: id,
-                quantity: req.body.quantity
+                quantity:  productssave[0].quantiti,
+                total_price: productssave[0].product_price
             });
 
             detail.save();
