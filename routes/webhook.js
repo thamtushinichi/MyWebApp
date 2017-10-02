@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/',function (req,res,next) {
+    console.log("da vao duoc bot api");
     if (req.query['hub.mode'] === 'subscribe' &&
-        req.query['hub.verify_token'] ==='EAAbtwggVDPABAGEZBpqLCB3IatJVcAMIjprdMTkl4VeeK1N4HaZCmO2p9ISUX39x3ZClaW0fNHNFjSFPnDjUdHzZAHxwyCpumXSmvpLV3pG8GCMgx7ya4LmaziurqR9Nlmf59ZCaZC7SipOze69iItuNfjsIazGslR8LsRp81lGYcuEJXF2W5H') {
+        req.query['hub.verify_token'] ==='day_la_ma_xac_minh_cua_toi') {
         console.log("Validating webhook");
         res.status(200).send(req.query['hub.challenge']);
     } else {
@@ -11,9 +12,9 @@ router.get('/',function (req,res,next) {
         res.sendStatus(403);
     }
 });
-router.post('/webhook', function (req, res) {
+router.post('/', function (req, res) {
     var data = req.body;
-
+    console.log("da vao duoc bot api");
     // Make sure this is a page subscription
     if (data.object === 'page') {
 
