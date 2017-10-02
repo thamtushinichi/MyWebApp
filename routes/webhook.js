@@ -4,7 +4,7 @@ var router = express.Router();
 router.get('/',function (req,res,next) {
     console.log("da vao duoc bot api");
     if (req.query['hub.mode'] === 'subscribe' &&
-        req.query['hub.verify_token'] ==='day_la_ma_xac_minh_cua_toi') {
+        req.query['hub.     '] ==='day_la_ma_xac_minh_cua_toi') {
         console.log("Validating webhook");
         res.status(200).send(req.query['hub.challenge']);
     } else {
@@ -139,7 +139,7 @@ function sendTextMessage(recipientId, messageText) {
 function callSendAPI(messageData) {
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: { access_token: PAGE_ACCESS_TOKEN },
+        qs: { access_token: 'EAAbtwggVDPABAIwHgZBNjCZC7ku76xHkp0Wmzaf0cZB2muz8ZCtDprqXBhWuOWvV2utXKxfe559qFTwHq9BaCPxCTvjMbeJEuZAMOZATmaAPsJIrVxPDkZCFPVvZB7VE0CS4sZC4lF2rTDyk2g5saegW1vmZBheERH2Gbko54m9VEkoSf462YpbhcF' },
         method: 'POST',
         json: messageData
 

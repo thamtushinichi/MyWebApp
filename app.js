@@ -192,7 +192,7 @@ passport.use('login',new LocalStrategy({
 
 
 app.use('/', index);
-
+app.use('/webhook',webhook);
 app.use(function (req, res, next) {
     if (req.isAuthenticated() && req.user.role_id!=0) {
         next();
@@ -219,7 +219,7 @@ app.use(function (req, res, next) {
 
 
 app.use('/admin', admin);
-app.use('/webhook',webhook);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
