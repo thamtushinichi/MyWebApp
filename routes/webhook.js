@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var request = require('request');
 router.get('/',function (req,res,next) {
     console.log("da vao duoc bot api");
     if (req.query['hub.mode'] === 'subscribe' &&
