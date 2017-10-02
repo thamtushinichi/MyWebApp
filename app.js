@@ -13,6 +13,7 @@ var nodemailer=require('nodemailer');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
+var webhook= require('./routes/webhook');
 
 var passport=require('passport');
 var LocalStrategy=require('passport-local').Strategy;
@@ -218,6 +219,7 @@ app.use(function (req, res, next) {
 
 
 app.use('/admin', admin);
+app.use('/webhook',webhook);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

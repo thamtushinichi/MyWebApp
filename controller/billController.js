@@ -42,7 +42,7 @@ exports.get_checkout=function (req, res, next) {
         productssave=product;
         res.render('checkout',{products: product, total: total});
     })
-}
+};
 
 var totalbill=0;
 var productssave;
@@ -94,4 +94,4 @@ exports.confirm_checkout=function (req, res, next) {
         res.redirect('/');
     })
 
-}
+};
