@@ -14,7 +14,6 @@ router.get('/',function (req,res,next) {
 });
 router.post('/', function (req, res) {
     var data = req.body;
-    console.log("da vao duoc bot api");
     // Make sure this is a page subscription
     if (data.object === 'page') {
 
