@@ -172,4 +172,156 @@ function receivedPostback(event) {
     // let them know it was successful
     sendTextMessage(senderID, "Postback called");
 }
+
+function setupGetStartedButton(res) {
+    var messageData = {
+        "get_started": {
+            "payload": "getstarted"
+        }
+    };
+    // Start the request
+    sendSetupRequest(messageData, res);
+}
+
+function setupGreetingText(res) {
+    var messageData = {
+        "greeting": [{
+            "locale": "default",
+            "text": "Chào mừng đến với trang Facebook của chúng tui !"
+        }, {
+            "locale": "en_US",
+            "text": "Greeting text for en_US local !"
+        }]
+    };
+
+    sendSetupRequest(messageData, res);
+
+}
+
+function setupPersistentMenu(res) {
+    var messageData = {
+        "persistent_menu": [{
+            "locale": "default",
+            "composer_input_disabled": false,
+            "call_to_actions": [{
+                "title": "Info",
+                "type": "nested",
+                "call_to_actions": [{
+                    "title": "Help",
+                    "type": "postback",
+                    "payload": "HELP_PAYLOAD"
+                },
+                    {
+                        "title": "Contact Me",
+                        "type": "postback",
+                        "payload": "CONTACT_INFO_PAYLOAD"
+                    },
+                    {
+                        "title": "Searching tags",
+                        "type": "postback",
+                        "payload": "TAGS_PAYLOAD"
+                    }
+                ]
+            },
+                {
+                    "type": "web_url",
+                    "title": "Visit website ",
+                    "url": "https://webstoreapp.herokuapp.com",
+                    "webview_height_ratio": "full"
+                }
+            ]
+        },
+            {
+                "locale": "zh_CN",
+                "composer_input_disabled": false
+            }
+        ]
+    };
+    // Start the request
+    sendSetupRequest(messageData, res);
+
+}
+
+function sendSetupRequest(messageData, res) {
+    request({
+            url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + "EAAbtwggVDPABAIwHgZBNjCZC7ku76xHkp0Wmzaf0cZB2muz8ZCtDprqXBhWuOWvV2utXKxfe559qFTwHq9BaCPxCTvjMbeJEuZAMOZATmaAPsJIrVxPDkZCFPVvZB7VE0CS4sZC4lF2rTDyk2g5saegW1vmZBheERH2Gbko54m9VEkoSf462YpbhcF",
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            form: messageData
+        },
+        function(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                // Print out the response body
+                res.send(body);
+
+            } else {
+                // TODO: Handle errors
+                res.send(body);
+            }
+        });
+}
+
+function sendDeleteSetupRequest(res) {
+    var messageData = {
+        "fields": [
+            "greeting",
+            "get_started",
+            "persistent_menu"
+        ]
+    };
+    request({
+            url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + "EAAbtwggVDPABAIwHgZBNjCZC7ku76xHkp0Wmzaf0cZB2muz8ZCtDprqXBhWuOWvV2utXKxfe559qFTwHq9BaCPxCTvjMbeJEuZAMOZATmaAPsJIrVxPDkZCFPVvZB7VE0CS4sZC4lF2rTDyk2g5saegW1vmZBheERH2Gbko54m9VEkoSf462YpbhcF",
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            form: messageData
+        },
+        function(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                // Print out the response body
+                res.send(body);
+
+            } else {
+                // TODO: Handle errors
+                res.send(body);
+            }
+        });
+}
+
+function createWhitelist(res) {
+    var messageData = {
+        setting_type: "domain_whitelisting",
+        whitelisted_domains: ["https://cowbuffalo.herokuapp.com/"],
+        domain_action_type: "add"
+    };
+    request({
+            url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + "EAAbtwggVDPABAIwHgZBNjCZC7ku76xHkp0Wmzaf0cZB2muz8ZCtDprqXBhWuOWvV2utXKxfe559qFTwHq9BaCPxCTvjMbeJEuZAMOZATmaAPsJIrVxPDkZCFPVvZB7VE0CS4sZC4lF2rTDyk2g5saegW1vmZBheERH2Gbko54m9VEkoSf462YpbhcF",
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            form: messageData
+        },
+        function(error, response, body) {
+            if (!error && response.statusCode == 200) {
+                // Print out the response body
+                res.send(body);
+
+            } else {
+                // TODO: Handle errors
+                res.send(body);
+            }
+        });
+}
+
+router.get('/setup', function(req, res) {
+    setupGetStartedButton(res);
+    setupPersistentMenu(res);
+    setupGreetingText(res);
+});
+
+router.get('/deletesetup', function(req, res) {
+    sendDeleteSetupRequest(res);
+});
+
+router.get('/whitelist', function(req, res) {
+    createWhitelist(res);
+});
 module.exports = router;
