@@ -166,7 +166,7 @@ function sendTextMessage(recipientId, messageText) {
 function callSendAPI(messageData) {
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: { access_token: 'EAAbtwggVDPABABnOylZALqAxxmVDNO2jzZCoBGN3g9NCIlbYWLPhTknpiFc3fvIuXMhZBtcWJkkzgalSoNVOZCWyY0RPHAPmyYt11ZAqjsl0n7MP4ZBZCK6ZATuVWZB3rZBsgfCDiw88DKxqWPOaUYJyE6vbgfL4Xzv1jCUVfKrNlpudJSZAYkVQqQy' },
+        qs: { access_token: 'EAAbtwggVDPABAOItgtDQWl8ZBNZCFu3pSNDYQUwZBaL7yX2xrCiVe7jitRHrZBgRLIR4XBum0ZBdKeefVEdDBZC6ZAYfsRZA450w4bMV6ug43U8uQZCq5vJt1RQ5R7UEvii8swzt6RCgv4ewE8iNrCXZBJCpagLUajJmGwNmvZBxlXUn88lcgyG4j05' },
         method: 'POST',
         json: messageData
 
@@ -296,7 +296,7 @@ function setupPersistentMenu(res) {
 
 function sendSetupRequest(messageData, res) {
     request({
-            url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + EAAbtwggVDPABABnOylZALqAxxmVDNO2jzZCoBGN3g9NCIlbYWLPhTknpiFc3fvIuXMhZBtcWJkkzgalSoNVOZCWyY0RPHAPmyYt11ZAqjsl0n7MP4ZBZCK6ZATuVWZB3rZBsgfCDiw88DKxqWPOaUYJyE6vbgfL4Xzv1jCUVfKrNlpudJSZAYkVQqQy,
+            url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + EAAbtwggVDPABAOItgtDQWl8ZBNZCFu3pSNDYQUwZBaL7yX2xrCiVe7jitRHrZBgRLIR4XBum0ZBdKeefVEdDBZC6ZAYfsRZA450w4bMV6ug43U8uQZCq5vJt1RQ5R7UEvii8swzt6RCgv4ewE8iNrCXZBJCpagLUajJmGwNmvZBxlXUn88lcgyG4j05,
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             form: messageData
@@ -322,7 +322,7 @@ function sendDeleteSetupRequest(res) {
         ]
     };
     request({
-            url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + EAAbtwggVDPABABnOylZALqAxxmVDNO2jzZCoBGN3g9NCIlbYWLPhTknpiFc3fvIuXMhZBtcWJkkzgalSoNVOZCWyY0RPHAPmyYt11ZAqjsl0n7MP4ZBZCK6ZATuVWZB3rZBsgfCDiw88DKxqWPOaUYJyE6vbgfL4Xzv1jCUVfKrNlpudJSZAYkVQqQy,
+            url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + EAAbtwggVDPABAOItgtDQWl8ZBNZCFu3pSNDYQUwZBaL7yX2xrCiVe7jitRHrZBgRLIR4XBum0ZBdKeefVEdDBZC6ZAYfsRZA450w4bMV6ug43U8uQZCq5vJt1RQ5R7UEvii8swzt6RCgv4ewE8iNrCXZBJCpagLUajJmGwNmvZBxlXUn88lcgyG4j05,
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             form: messageData
@@ -346,7 +346,7 @@ function createWhitelist(res) {
         domain_action_type: "add"
     };
     request({
-            url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + EAAbtwggVDPABABnOylZALqAxxmVDNO2jzZCoBGN3g9NCIlbYWLPhTknpiFc3fvIuXMhZBtcWJkkzgalSoNVOZCWyY0RPHAPmyYt11ZAqjsl0n7MP4ZBZCK6ZATuVWZB3rZBsgfCDiw88DKxqWPOaUYJyE6vbgfL4Xzv1jCUVfKrNlpudJSZAYkVQqQy,
+            url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + EAAbtwggVDPABAOItgtDQWl8ZBNZCFu3pSNDYQUwZBaL7yX2xrCiVe7jitRHrZBgRLIR4XBum0ZBdKeefVEdDBZC6ZAYfsRZA450w4bMV6ug43U8uQZCq5vJt1RQ5R7UEvii8swzt6RCgv4ewE8iNrCXZBJCpagLUajJmGwNmvZBxlXUn88lcgyG4j05,
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             form: messageData
