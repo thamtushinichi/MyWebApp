@@ -299,7 +299,7 @@ function sendSetupRequest(messageData, res) {
 
     request({
             //url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + PAGE_ACCESS_TOKEN,
-            uri: 'https://graph.facebook.com/v2.6/me/messages',
+            uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
             qs: { access_token: PAGE_ACCESS_TOKEN },
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -327,7 +327,7 @@ function sendDeleteSetupRequest(res) {
     };
     request({
             //url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + PAGE_ACCESS_TOKEN,
-            uri: 'https://graph.facebook.com/v2.6/me/messages',
+            uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
             qs: { access_token: PAGE_ACCESS_TOKEN },
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
@@ -353,7 +353,7 @@ function createWhitelist(res) {
     };
     request({
             //url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + PAGE_ACCESS_TOKEN,
-            uri: 'https://graph.facebook.com/v2.6/me/messages',
+            uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
             qs: { access_token: PAGE_ACCESS_TOKEN },
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
