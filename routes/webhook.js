@@ -27,7 +27,10 @@ router.post('/', function (req, res) {
             entry.messaging.forEach(function(event) {
                 if (event.message) {
                     receivedMessage(event);
-                } else {
+                } else if (event.postback) {
+                    receivedPostback(event);
+                }
+                else {
                     console.log("Webhook received unknown event: ", event);
                 }
             });
@@ -54,7 +57,7 @@ function receivedMessage(event) {
         senderID, recipientID, timeOfMessage);
     console.log(JSON.stringify(message));
 
-    var messageId = message.mid;
+    var messageId = message._id;
 
     var messageText = message.text;
     var messageAttachments = message.attachments;
@@ -67,14 +70,38 @@ function receivedMessage(event) {
             case 'generic':
                 sendGenericMessage(senderID);
                 break;
-
+            case 'hello':
+                var resText = "Đây là Bot";
+                sendTextMessage(senderID, resText);
+                break;
+            case 'smartphone':
+                sendListMessage(senderID);
+                break;
+            case 'laptop':
+                var resText = "Chưa code :)";
+                sendTextMessage(senderID, resText);
+                break;
+            case 'pc':
+                var resText = "Chưa code :)";
+                sendTextMessage(senderID, resText);
+                break;
+            case 'tablet':
+                var resText = "Chưa code :)";
+                sendTextMessage(senderID, resText);
+                break;
+            case 'cellphone':
+                var resText = "Chưa code :)";
+                sendTextMessage(senderID, resText);
+                break;
+            case 'other':
+                var resText = "Chưa code :)";
+                sendTextMessage(senderID, resText);
+                break;
             default:
                 sendTextMessage(senderID, messageText);
         }
     } else if (messageAttachments) {
         sendTextMessage(senderID, "Message with attachment received");
-    } else if (event.postback) {
-        receivedPostback(event);
     }
 }
 function sendGenericMessage(recipientId, messageText) {
@@ -139,7 +166,7 @@ function sendTextMessage(recipientId, messageText) {
 function callSendAPI(messageData) {
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: { access_token: 'EAAbtwggVDPABAIwHgZBNjCZC7ku76xHkp0Wmzaf0cZB2muz8ZCtDprqXBhWuOWvV2utXKxfe559qFTwHq9BaCPxCTvjMbeJEuZAMOZATmaAPsJIrVxPDkZCFPVvZB7VE0CS4sZC4lF2rTDyk2g5saegW1vmZBheERH2Gbko54m9VEkoSf462YpbhcF' },
+        qs: { access_token: EAAbtwggVDPABAIwHgZBNjCZC7ku76xHkp0Wmzaf0cZB2muz8ZCtDprqXBhWuOWvV2utXKxfe559qFTwHq9BaCPxCTvjMbeJEuZAMOZATmaAPsJIrVxPDkZCFPVvZB7VE0CS4sZC4lF2rTDyk2g5saegW1vmZBheERH2Gbko54m9VEkoSf462YpbhcF },
         method: 'POST',
         json: messageData
 
@@ -165,13 +192,37 @@ function receivedPostback(event) {
     // The 'payload' param is a developer-defined field which is set in a postback
     // button for Structured Messages.
     var payload = event.postback.payload;
-
+    switch (payload)
+    {
+        case 'getstarted':
+            var msg = "Hi ,I'm a Bot ,and I was created to help you easily .... ";
+            sendTextMessage(senderID, msg);
+            break;
+        case 'HELP_PAYLOAD':
+            var msg = "Key word:\n1. hello\n2. generic"
+            sendTextMessage(senderID, msg);
+            break;
+        case 'CONTACT_INFO_PAYLOAD':
+            var msg = "Phone number: 0969 538 816\nEmail: nthanhtuanzz@gmail.com"
+            sendTextMessage(senderID, msg);
+            break;
+        case 'TAGS_PAYLOAD':
+            var msg = "Tags: smartphone, laptop, pc, tablet, cellphone, other"
+            sendTextMessage(senderID, msg);
+            break;
+        case 'VIEW_MORE_PAYLOAD':
+            sendListMessage(senderID);
+            break;
+        default:
+            sendTextMessage(senderID, "Postback called");
+            break;
+    }
     console.log("Received postback for user %d and page %d with payload '%s' " +
         "at %d", senderID, recipientID, payload, timeOfPostback);
 
     // When a postback is called, we'll send a message back to the sender to
     // let them know it was successful
-    sendTextMessage(senderID, "Postback called");
+
 }
 
 function setupGetStartedButton(res) {
@@ -311,7 +362,69 @@ function createWhitelist(res) {
             }
         });
 }
+function sendListMessage(recipientId) {
+    var messageData = {
+        recipient: {
+            id: recipientId
+        },
+        message: {
+            attachment: {
+                type: "template",
+                payload: {
+                    template_type: "list",
+                    top_element_style: "compact",
+                    elements: [{
+                        title: "Iphone 7",
+                        subtitle: "See all our colors",
+                        image_url: "https://cowbuffalo.herokuapp.com/images/product/1497872939167_iphone7-plus-jetblack-select-2016.jpg",
+                        buttons: [{
+                            title: "View",
+                            type: "web_url",
+                            url: "https://cowbuffalo.herokuapp.com/",
+                            messenger_extensions: true,
+                            webview_height_ratio: "tall",
+                            fallback_url: "https://cowbuffalo.herokuapp.com/"
+                        }]
+                    },
+                        {
+                            title: "Samsung Galaxy S8 Plus",
+                            subtitle: "See all our colors",
+                            image_url: "https://cowbuffalo.herokuapp.com/images/product/1498792631393_samsung-galaxy-s8-plus.png",
+                            buttons: [{
+                                title: "View",
+                                type: "web_url",
+                                url: "https://cowbuffalo.herokuapp.com/",
+                                messenger_extensions: true,
+                                webview_height_ratio: "tall",
+                                fallback_url: "https://cowbuffalo.herokuapp.com/"
+                            }]
+                        },
+                        {
+                            title: "Samsung Galaxy A9 Pro",
+                            subtitle: "See all our colors",
+                            image_url: "https://cowbuffalo.herokuapp.com/images/product/1498794350673_samsung-galaxy-a9.png",
+                            buttons: [{
+                                title: "View",
+                                type: "web_url",
+                                url: "https://cowbuffalo.herokuapp.com/",
+                                messenger_extensions: true,
+                                webview_height_ratio: "tall",
+                                fallback_url: "https://cowbuffalo.herokuapp.com/"
+                            }]
+                        },
+                    ],
+                    buttons: [{
+                        title: "View More",
+                        type: "postback",
+                        payload: "VIEW_MORE_PAYLOAD"
+                    }]
+                }
+            }
+        }
+    };
 
+    callSendAPI(messageData);
+}
 router.get('/setup', function(req, res) {
     setupGetStartedButton(res);
     setupPersistentMenu(res);
