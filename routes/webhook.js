@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var async = require('asyncawait/async');
+var await = require('asyncawait/await');
+
 var PAGE_ACCESS_TOKEN='EAAbtwggVDPABAOItgtDQWl8ZBNZCFu3pSNDYQUwZBaL7yX2xrCiVe7jitRHrZBgRLIR4XBum0ZBdKeefVEdDBZC6ZAYfsRZA450w4bMV6ug43U8uQZCq5vJt1RQ5R7UEvii8swzt6RCgv4ewE8iNrCXZBJCpagLUajJmGwNmvZBxlXUn88lcgyG4j05';
 router.get('/',function (req,res,next) {
     console.log("da vao duoc bot api");
@@ -225,17 +228,65 @@ function receivedPostback(event) {
 
 }
 
-function setupGetStartedButton(res) {
+function setupGetStartedButton_PersistentMenu_GreetingText(res) {
+    console.log('start function setup Button');
     var messageData = {
         "get_started": {
             "payload": "getstarted"
-        }
+        },
+        "greeting": [{
+            "locale": "default",
+            "text": "Chào mừng đến với trang Facebook của chúng tui !"
+        }, {
+            "locale": "en_US",
+            "text": "Greeting text for en_US local !"
+        }],
+        "persistent_menu": [{
+            "locale": "default",
+            "composer_input_disabled": false,
+            "call_to_actions": [{
+                "title": "Info",
+                "type": "nested",
+                "call_to_actions": [{
+                    "title": "Help",
+                    "type": "postback",
+                    "payload": "HELP_PAYLOAD"
+                },
+                    {
+                        "title": "Contact Me",
+                        "type": "postback",
+                        "payload": "CONTACT_INFO_PAYLOAD"
+                    },
+                    {
+                        "title": "Searching tags",
+                        "type": "postback",
+                        "payload": "TAGS_PAYLOAD"
+                    }
+                ]
+            },
+                {
+                    "type": "web_url",
+                    "title": "Visit website ",
+                    "url": "https://cowbuffalo.herokuapp.com",
+                    "webview_height_ratio": "full"
+                }
+            ]
+        },
+            {
+                "locale": "zh_CN",
+                "composer_input_disabled": false
+            }
+        ]
+
     };
     // Start the request
+
     sendSetupRequest(messageData, res);
+    console.log('end function setup Button');
 }
 
 function setupGreetingText(res) {
+    console.log('start function setupGreetingText');
     var messageData = {
         "greeting": [{
             "locale": "default",
@@ -245,12 +296,13 @@ function setupGreetingText(res) {
             "text": "Greeting text for en_US local !"
         }]
     };
-
+    console.log("GreetingText");
     sendSetupRequest(messageData, res);
-
+    console.log('end function setupGreetingText');
 }
 
 function setupPersistentMenu(res) {
+    console.log('start function setupPersistentMenu');
     var messageData = {
         "persistent_menu": [{
             "locale": "default",
@@ -289,14 +341,14 @@ function setupPersistentMenu(res) {
             }
         ]
     };
+    //console.log("Menu");
     // Start the request
     sendSetupRequest(messageData, res);
-
+    console.log('end function setupPersistentMenu');
 }
 
-function sendSetupRequest(messageData, res) {
-
-
+ function sendSetupRequest(messageData, res) {
+    console.log('start function sendSetupRequest');
     request({
             //url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + PAGE_ACCESS_TOKEN,
             uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
@@ -308,16 +360,21 @@ function sendSetupRequest(messageData, res) {
         function(error, response, body) {
             if (!error && response.statusCode == 200) {
                 // Print out the response body
-                res.send(body);
+                console.log("Successfull khi tao setup request");
+                //console.log(response);
+                  res.send(body);
 
             } else {
                 // TODO: Handle errors
-                res.send(body);
+                console.log("Failed khi tao setup request");
+               // console.log(res);
+                 res.send(body);
             }
         });
+    console.log('end function sendSetupRequest');
 }
 
-function sendDeleteSetupRequest(res) {
+ function sendDeleteSetupRequest(res) {
     var messageData = {
         "fields": [
             "greeting",
@@ -336,22 +393,26 @@ function sendDeleteSetupRequest(res) {
         function(error, response, body) {
             if (!error && response.statusCode == 200) {
                 // Print out the response body
+                console.log("Successfull khi tao delete setup");
+
                 res.send(body);
 
             } else {
-                // TODO: Handle errors
+                console.log("Failed khi delete setup");
+
                 res.send(body);
             }
         });
+
 }
 
-function createWhitelist(res) {
+ function createWhitelist(res) {
     var messageData = {
         setting_type: "domain_whitelisting",
         whitelisted_domains: ["https://cowbuffalo.herokuapp.com/"],
         domain_action_type: "add"
     };
-    request({
+     request({
             //url: "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=" + PAGE_ACCESS_TOKEN,
             uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
             qs: { access_token: PAGE_ACCESS_TOKEN },
@@ -362,10 +423,15 @@ function createWhitelist(res) {
         function(error, response, body) {
             if (!error && response.statusCode == 200) {
                 // Print out the response body
+                console.log("Successfull khi tao whitelist");
+                //console.log(res);
+
                 res.send(body);
 
             } else {
                 // TODO: Handle errors
+                console.log("Failed khi tao whitelist");
+                //console.log(res);
                 res.send(body);
             }
         });
@@ -434,10 +500,10 @@ function sendListMessage(recipientId) {
     callSendAPI(messageData);
 }
 router.get('/setup', function(req, res) {
-    setupGetStartedButton(res);
-    setupPersistentMenu(res);
-    setupGreetingText(res);
+    setupGetStartedButton_PersistentMenu_GreetingText(res);
+
 });
+
 
 router.get('/deletesetup', function(req, res) {
     sendDeleteSetupRequest(res);
