@@ -280,72 +280,12 @@ function setupGetStartedButton_PersistentMenu_GreetingText(res) {
 
     };
     // Start the request
-
     sendSetupRequest(messageData, res);
     console.log('end function setup Button');
 }
 
-function setupGreetingText(res) {
-    console.log('start function setupGreetingText');
-    var messageData = {
-        "greeting": [{
-            "locale": "default",
-            "text": "Chào mừng đến với trang Facebook của chúng tui !"
-        }, {
-            "locale": "en_US",
-            "text": "Greeting text for en_US local !"
-        }]
-    };
-    console.log("GreetingText");
-    sendSetupRequest(messageData, res);
-    console.log('end function setupGreetingText');
-}
 
-function setupPersistentMenu(res) {
-    console.log('start function setupPersistentMenu');
-    var messageData = {
-        "persistent_menu": [{
-            "locale": "default",
-            "composer_input_disabled": false,
-            "call_to_actions": [{
-                "title": "Info",
-                "type": "nested",
-                "call_to_actions": [{
-                    "title": "Help",
-                    "type": "postback",
-                    "payload": "HELP_PAYLOAD"
-                },
-                    {
-                        "title": "Contact Me",
-                        "type": "postback",
-                        "payload": "CONTACT_INFO_PAYLOAD"
-                    },
-                    {
-                        "title": "Searching tags",
-                        "type": "postback",
-                        "payload": "TAGS_PAYLOAD"
-                    }
-                ]
-            },
-                {
-                    "type": "web_url",
-                    "title": "Visit website ",
-                    "url": "https://cowbuffalo.herokuapp.com",
-                    "webview_height_ratio": "full"
-                }
-            ]
-        },
-            {
-                "locale": "zh_CN",
-                "composer_input_disabled": false
-            }
-        ]
-    };
-    //console.log("Menu");
-    // Start the request
-    sendSetupRequest(messageData, res);
-    console.log('end function setupPersistentMenu');
-}
+
 
  function sendSetupRequest(messageData, res) {
     console.log('start function sendSetupRequest');
