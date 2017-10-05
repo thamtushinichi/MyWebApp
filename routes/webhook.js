@@ -245,6 +245,17 @@ function getCategoryList(callback){
     });
 }
 
+function getProductList(callback){
+    productModel.find({},null,{sort:{'_id': -1}},function (err, products){
+        if (err){
+            console.log("fail to get product list: ",err)
+            return;
+        }
+        callback(products);
+        //res.render('product_Admin/listproduct',{items:products,layout:'layoutadmin'});
+    });
+}
+
 function setupGetStartedButton_PersistentMenu_GreetingText(res) {
     console.log('start function setup Button');
     var messageData = {
