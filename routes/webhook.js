@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-var async = require('asyncawait/async');
-var await = require('asyncawait/await');
+var promises = require('promises');
 var categoryModel = require('../model/category');
 
 var PAGE_ACCESS_TOKEN='EAAbtwggVDPABAOItgtDQWl8ZBNZCFu3pSNDYQUwZBaL7yX2xrCiVe7jitRHrZBgRLIR4XBum0ZBdKeefVEdDBZC6ZAYfsRZA450w4bMV6ug43U8uQZCq5vJt1RQ5R7UEvii8swzt6RCgv4ewE8iNrCXZBJCpagLUajJmGwNmvZBxlXUn88lcgyG4j05';
@@ -216,8 +215,8 @@ function receivedPostback(event) {
                 categories.forEach(function(category){
                     msg += category.category_name + '\n';
                 });
+                sendTextMessage(senderID, msg);
             });
-            sendTextMessage(senderID, msg);
             break;
         case 'VIEW_MORE_PAYLOAD':
             sendListMessage(senderID);
