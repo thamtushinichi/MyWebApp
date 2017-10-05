@@ -4,6 +4,7 @@ var request = require('request');
 var async = require('asyncawait/async');
 var await = require('asyncawait/await');
 var categoryModel = require('../model/category');
+var productModel = require('../model/product');
 
 var PAGE_ACCESS_TOKEN='EAAbtwggVDPABAOItgtDQWl8ZBNZCFu3pSNDYQUwZBaL7yX2xrCiVe7jitRHrZBgRLIR4XBum0ZBdKeefVEdDBZC6ZAYfsRZA450w4bMV6ug43U8uQZCq5vJt1RQ5R7UEvii8swzt6RCgv4ewE8iNrCXZBJCpagLUajJmGwNmvZBxlXUn88lcgyG4j05';
 router.get('/',function (req,res,next) {
