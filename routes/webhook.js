@@ -3,6 +3,7 @@ var router = express.Router();
 var request = require('request');
 var async = require('asyncawait/async');
 var await = require('asyncawait/await');
+var categoryModel = require('../model/category');
 
 var PAGE_ACCESS_TOKEN='EAAbtwggVDPABAOItgtDQWl8ZBNZCFu3pSNDYQUwZBaL7yX2xrCiVe7jitRHrZBgRLIR4XBum0ZBdKeefVEdDBZC6ZAYfsRZA450w4bMV6ug43U8uQZCq5vJt1RQ5R7UEvii8swzt6RCgv4ewE8iNrCXZBJCpagLUajJmGwNmvZBxlXUn88lcgyG4j05';
 router.get('/',function (req,res,next) {
@@ -210,7 +211,12 @@ function receivedPostback(event) {
             sendTextMessage(senderID, msg);
             break;
         case 'TAGS_PAYLOAD':
-            var msg = "Tags: smartphone, laptop, pc, tablet, cellphone, other"
+            var msg = "Tags: ";
+            getCategoryList(function(categories){
+                categories.forEach(function(category){
+                    msg += category.category_name + '\n';
+                });
+            });
             sendTextMessage(senderID, msg);
             break;
         case 'VIEW_MORE_PAYLOAD':
@@ -226,6 +232,28 @@ function receivedPostback(event) {
     // When a postback is called, we'll send a message back to the sender to
     // let them know it was successful
 
+}
+
+function getCategoryList(callback){
+    categoryModel.find({},function (err, categories){
+        if (err){
+            console.log("fail to get category list: ",err)
+            return;
+        }
+        callback(categories);
+        //res.render('category/listcategory',{items:categories,layout:'layoutadmin'});
+    });
+}
+
+function getProductList(callback){
+    productModel.find({},null,{sort:{'_id': -1}},function (err, products){
+        if (err){
+            console.log("fail to get product list: ",err)
+            return;
+        }
+        callback(products);
+        //res.render('product_Admin/listproduct',{items:products,layout:'layoutadmin'});
+    });
 }
 
 function setupGetStartedButton_PersistentMenu_GreetingText(res) {
