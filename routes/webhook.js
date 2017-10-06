@@ -70,6 +70,7 @@ function receivedMessage(event) {
 
         // If we receive a text message, check to see if it matches a keyword
         // and send back the example. Otherwise, just echo the text we received.
+        var isTag = false;
         switch (messageText) {
             case 'generic':
                 sendGenericMessage(senderID);
@@ -78,37 +79,34 @@ function receivedMessage(event) {
                 var resText = "Đây là Bot";
                 sendTextMessage(senderID, resText);
                 break;
-            case 'smartphone':
-                sendListMessage(senderID);
-                break;
-            case 'laptop':
-                var resText = "Chưa code :)";
-                sendTextMessage(senderID, resText);
-                break;
-            case 'pc':
-                var resText = "Chưa code :)";
-                sendTextMessage(senderID, resText);
-                break;
-            case 'tablet':
-                var resText = "Chưa code :)";
-                sendTextMessage(senderID, resText);
-                break;
-            case 'cellphone':
-                var resText = "Chưa code :)";
-                sendTextMessage(senderID, resText);
-                break;
-            case 'other':
-                var resText = "Chưa code :)";
+            case 'hi':
+                var resText = "Đây là Bot";
                 sendTextMessage(senderID, resText);
                 break;
             default:
-                sendTextMessage(senderID, messageText);
+                isTag = true;
+                //sendTextMessage(senderID, messageText);
+        }
+        if(isTag){
+            var catId;
+            getCategoryList(function(categories){
+                categories.forEach(function(category){
+                    if(messageText === category.category_name){
+                        catId = category.id;
+                        break;
+                    }
+                });
+
+                getProductsByCatId(catId,function(products){
+                    sendGenericMessage(senderID, products);
+                });
+            });
         }
     } else if (messageAttachments) {
         sendTextMessage(senderID, "Message with attachment received");
     }
 }
-function sendGenericMessage(recipientId, messageText) {
+function sendGenericMessage(recipientId, products) {
     // To be expanded in later sections
     var messageData = {
         recipient: {
@@ -119,39 +117,15 @@ function sendGenericMessage(recipientId, messageText) {
                 type: "template",
                 payload: {
                     template_type: "generic",
-                    elements: [{
-                        title: "rift",
-                        subtitle: "Next-generation virtual reality",
-                        item_url: "https://www.oculus.com/en-us/rift/",
-                        image_url: "http://messengerdemo.parseapp.com/img/rift.png",
-                        buttons: [{
-                            type: "web_url",
-                            url: "https://www.oculus.com/en-us/rift/",
-                            title: "Open Web URL"
-                        }, {
-                            type: "postback",
-                            title: "Call Postback",
-                            payload: "Payload for first bubble",
-                        }],
-                    }, {
-                        title: "touch",
-                        subtitle: "Your Hands, Now in VR",
-                        item_url: "https://www.oculus.com/en-us/touch/",
-                        image_url: "http://messengerdemo.parseapp.com/img/touch.png",
-                        buttons: [{
-                            type: "web_url",
-                            url: "https://www.oculus.com/en-us/touch/",
-                            title: "Open Web URL"
-                        }, {
-                            type: "postback",
-                            title: "Call Postback",
-                            payload: "Payload for second bubble",
-                        }]
-                    }]
+                    elements: []
                 }
             }
         }
     };
+    
+    for (var i = 0; i < 4; i++) {
+        addItemToGeneric(products[i], messageData.message.attachment.payload.elements);
+    }
 
     callSendAPI(messageData);
 }
@@ -245,14 +219,28 @@ function getCategoryList(callback){
     });
 }
 
-function getProductList(callback){
-    productModel.find({},null,{sort:{'_id': -1}},function (err, products){
+function getProductsByCatId(id,callback){
+    productModel.find({category_id: id},null,{sort:{'_id': -1}},function (err, products){
         if (err){
             console.log("fail to get product list: ",err)
             return;
         }
         callback(products);
         //res.render('product_Admin/listproduct',{items:products,layout:'layoutadmin'});
+    });
+}
+
+function addItemToGeneric(product, arr) {
+    arr.push({
+            title: product.product_name,
+            subtitle: product.price,
+            item_url: "c",
+            image_url: product.image,
+            buttons: {
+                type: "web_url",
+                url: "c",
+                title: "View"
+            }
     });
 }
 
