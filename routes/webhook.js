@@ -86,6 +86,7 @@ function receivedMessage(event) {
             default:
                 isTag = true;
                 //sendTextMessage(senderID, messageText);
+                break;
         }
         if(isTag){
             var catId;
@@ -220,7 +221,7 @@ function getCategoryList(callback){
 }
 
 function getProductsByCatId(id,callback){
-    productModel.find({category_id: id},null,{sort:{'_id': -1}},function (err, products){
+    productModel.find({category_id: id},null,{sort:{'_id': -1}}).skip(0).limit(4).exec(function (err, products){
         if (err){
             console.log("fail to get product list: ",err)
             return;
@@ -457,6 +458,7 @@ function sendListMessage(recipientId) {
 }
 router.get('/setup', function(req, res) {
     setupGetStartedButton_PersistentMenu_GreetingText(res);
+
 
 });
 
