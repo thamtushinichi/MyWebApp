@@ -231,7 +231,7 @@ function getProductsByCatId(id,callback){
 function addItemToGeneric(product, arr) {
     arr.push({
             title: product.product_name,
-            subtitle: product.price,
+            subtitle: "Price: " + product.price + "$",
             item_url: "http://cowbuffalo.herokuapp.com/",
             image_url: product.image,
             // buttons: {
