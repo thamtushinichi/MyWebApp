@@ -84,24 +84,21 @@ function receivedMessage(event) {
                 sendTextMessage(senderID, resText);
                 break;
             default:
-                isTag = true;
+               // isTag = true;
                 //sendTextMessage(senderID, messageText);
-                break;
-        }
-        if(isTag){
-            var catId;
-            getCategoryList(function(categories){
-                for(var i = 0; i < categories.length; i++){
-                    if(messageText === categories[i].category_name){
-                        catId = category.id;
-                        break;
+                var catId;
+                getCategoryList(function(categories){
+                    for(var i = 0; i < categories.length; i++){
+                        if(messageText === categories[i].category_name){
+                            catId = categories[i].id;
+                            break;
+                        }
                     }
-                }
-
-                getProductsByCatId(catId,function(products){
-                    sendGenericMessage(senderID, products);
+                    getProductsByCatId(catId,function(products){
+                        sendGenericMessage(senderID, products);
+                    });
                 });
-            });
+                break;
         }
     } else if (messageAttachments) {
         sendTextMessage(senderID, "Message with attachment received");
