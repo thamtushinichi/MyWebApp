@@ -70,7 +70,7 @@ function receivedMessage(event) {
 
         // If we receive a text message, check to see if it matches a keyword
         // and send back the example. Otherwise, just echo the text we received.
-        var isTag = false;
+        //var isTag = false;
         switch (messageText) {
             case 'generic':
                 sendGenericMessage(senderID);
@@ -121,10 +121,10 @@ function sendGenericMessage(recipientId, products) {
         }
     };
     
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < products.length && 4; i++) {
         addItemToGeneric(products[i], messageData.message.attachment.payload.elements);
     }
-
+    JSON.stringify(messageData);
     callSendAPI(messageData);
 }
 function sendTextMessage(recipientId, messageText) {
@@ -455,7 +455,18 @@ function sendListMessage(recipientId) {
 }
 router.get('/setup', function(req, res) {
     setupGetStartedButton_PersistentMenu_GreetingText(res);
-
+    var catId;
+    getCategoryList(function(categories){
+        for(var i = 0; i < categories.length; i++){
+            if('Laptop' === categories[i].category_name){
+                catId = categories[i].id;
+                break;
+            }
+        }
+        getProductsByCatId(catId,function(products){
+            sendGenericMessage(1, products);
+        });
+    });
 
 });
 
