@@ -90,12 +90,12 @@ function receivedMessage(event) {
         if(isTag){
             var catId;
             getCategoryList(function(categories){
-                categories.forEach(function(category){
-                    if(messageText === category.category_name){
+                for(var i = 0; i < categories.length; i++){
+                    if(messageText === categories[i].category_name){
                         catId = category.id;
                         break;
                     }
-                });
+                }
 
                 getProductsByCatId(catId,function(products){
                     sendGenericMessage(senderID, products);
