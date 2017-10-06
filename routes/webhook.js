@@ -7,7 +7,7 @@ var productModel = require('../model/product');
 
 var PAGE_ACCESS_TOKEN='EAAbtwggVDPABAOItgtDQWl8ZBNZCFu3pSNDYQUwZBaL7yX2xrCiVe7jitRHrZBgRLIR4XBum0ZBdKeefVEdDBZC6ZAYfsRZA450w4bMV6ug43U8uQZCq5vJt1RQ5R7UEvii8swzt6RCgv4ewE8iNrCXZBJCpagLUajJmGwNmvZBxlXUn88lcgyG4j05';
 router.get('/',function (req,res,next) {
-    console.log("da vao duoc bot api");
+
     if (req.query['hub.mode'] === 'subscribe' &&
         req.query['hub.     '] ==='day_la_ma_xac_minh_cua_toi') {
         console.log("Validating webhook");
@@ -232,13 +232,13 @@ function addItemToGeneric(product, arr) {
     arr.push({
             title: product.product_name,
             subtitle: product.price,
-            item_url: "c",
+            item_url: "http://cowbuffalo.herokuapp.com/",
             image_url: product.image,
-            buttons: {
-                type: "web_url",
-                url: "c",
-                title: "View"
-            }
+            // buttons: {
+            //     type: "web_url",
+            //     url: "c",
+            //     title: "View"
+            // }
     });
 }
 
@@ -314,14 +314,10 @@ function setupGetStartedButton_PersistentMenu_GreetingText(res) {
         function(error, response, body) {
             if (!error && response.statusCode == 200) {
                 // Print out the response body
-                console.log("Successfull khi tao setup request");
-                //console.log(response);
+
                   res.send(body);
 
             } else {
-                // TODO: Handle errors
-                console.log("Failed khi tao setup request");
-               // console.log(res);
                  res.send(body);
             }
         });
@@ -347,12 +343,10 @@ function setupGetStartedButton_PersistentMenu_GreetingText(res) {
         function(error, response, body) {
             if (!error && response.statusCode == 200) {
                 // Print out the response body
-                console.log("Successfull khi tao delete setup");
 
                 res.send(body);
 
             } else {
-                console.log("Failed khi delete setup");
 
                 res.send(body);
             }
@@ -377,15 +371,10 @@ function setupGetStartedButton_PersistentMenu_GreetingText(res) {
         function(error, response, body) {
             if (!error && response.statusCode == 200) {
                 // Print out the response body
-                console.log("Successfull khi tao whitelist");
-                //console.log(res);
 
                 res.send(body);
 
             } else {
-                // TODO: Handle errors
-                console.log("Failed khi tao whitelist");
-                //console.log(res);
                 res.send(body);
             }
         });
@@ -455,18 +444,7 @@ function sendListMessage(recipientId) {
 }
 router.get('/setup', function(req, res) {
     setupGetStartedButton_PersistentMenu_GreetingText(res);
-    var catId;
-    getCategoryList(function(categories){
-        for(var i = 0; i < categories.length; i++){
-            if('Laptop' === categories[i].category_name){
-                catId = categories[i].id;
-                break;
-            }
-        }
-        getProductsByCatId(catId,function(products){
-            sendGenericMessage(1, products);
-        });
-    });
+
 
 });
 
